@@ -27,12 +27,10 @@ def get_flow_data(i):
     png_path = f"data/mpi_sintel/imgs/frame_{str(i).zfill(4)}.png"
     image = Image.open(png_path)
     image = np.array(image) / 255.0
-
     gt_path = f"data/mpi_sintel/gt/frame_{str(i-1).zfill(4)}.flo"
     try:
         gt = read_gt(gt_path)
     except AssertionError:
-        print(f"exception at {i}")
         gt = np.zeros((image.shape[0], image.shape[1], 2))
 
     return image, gt
