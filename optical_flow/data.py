@@ -26,7 +26,7 @@ def read_gt(file):
 def get_flow_data(i):
     png_path = f"data/mpi_sintel/imgs/frame_{str(i).zfill(4)}.png"
     image = Image.open(png_path)
-    image = np.array(image.getdata()) / 255.0
+    image = np.array(image) / 255.0
 
     gt_path = f"data/mpi_sintel/gt/frame_{str(i-1).zfill(4)}.flo"
     try:
@@ -40,8 +40,8 @@ def get_flow_data(i):
 
 if __name__ == "__main__":
     for i in range(1, 49):
-        _, gt = get_flow_data(i)
+        img, gt = get_flow_data(i)
         flow = flow_vis.flow_to_color(gt)
-        plt.imshow(flow)
+        plt.imshow(img)
         plt.show()
         plt.close()
