@@ -31,12 +31,12 @@ def get_flow_data(i):
     image = Image.open(png_path)
     image = np.array(image.getdata()) / 255.0
 
-    return gt, image
+    return image, gt
 
 
 if __name__ == "__main__":
     for i in range(1, 49):
-        gt, _ = get_flow_data(i)
+        _, gt = get_flow_data(i)
         flow = flow_vis.flow_to_color(gt)
         plt.imshow(flow)
         plt.show()
