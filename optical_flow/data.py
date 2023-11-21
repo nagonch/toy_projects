@@ -3,7 +3,7 @@ import numpy as np
 import os
 
 
-def read(file):
+def read_gt(file):
     TAG_FLOAT = 202021.25
     assert type(file) is str, "file is not str %r" % str(file)
     assert os.path.isfile(file) is True, "file does not exist %r" % str(file)
@@ -21,5 +21,16 @@ def read(file):
     return flow
 
 
+def get_flow_data(i):
+    gt_path = f"data/mpi_sintel/gt/frame_{str(i).zfill(4)}.flo"
+    gt = read_gt(gt_path)
+
+    png_path = f"data/mpi_sintel/imgs/frame_{str(i).zfill(4)}.png"
+    image = Image.open(png_path)
+    image = np.array(image.getdata()) / 255.0
+
+    return gt, image
+
+
 if __name__ == "__main__":
-    print(read("data/mpi_sintel/gt/frame_0001.flo").shape)
+    print(get_flow_data(1))
