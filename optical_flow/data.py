@@ -1,6 +1,8 @@
 from PIL import Image
 import numpy as np
 import os
+import flow_vis
+from matplotlib import pyplot as plt
 
 
 def read_gt(file):
@@ -33,4 +35,9 @@ def get_flow_data(i):
 
 
 if __name__ == "__main__":
-    print(get_flow_data(1))
+    for i in range(1, 49):
+        gt, _ = get_flow_data(i)
+        flow = flow_vis.flow_to_color(gt)
+        plt.imshow(flow)
+        plt.show()
+        plt.close()
